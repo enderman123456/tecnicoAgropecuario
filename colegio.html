@@ -1,0 +1,213 @@
+<!DOCTYPE html><html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Técnico Agropecuario 40201</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+        }
+        nav a {
+            margin: 15px;
+            text-decoration: none;
+            color: white;
+        }
+        section {
+            padding: 20px;
+        }
+        .event-list {
+            background: white;
+            padding: 10px;
+            display: inline-block;
+            border-radius: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Técnico Agropecuario 40201</h1>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#nosotros">Información de Nosotros</a>
+            <a href="#contacto">Ubicación y Contacto</a>
+            <a href="#eventos">Eventos</a>
+        </nav>
+    </header><section id="inicio">
+    <h2>Inicio</h2>
+    <p>Bienvenidos a la página oficial del Técnico Agropecuario 40201. Aquí encontrarás información importante.</p>
+</section>
+
+<section id="nosotros">
+    <h2>Información de Nosotros</h2>
+    <p>El Técnico Agropecuario 40201 es una institución dedicada a la educación en el ámbito agropecuario, brindando formación técnica y académica de calidad.</p>
+</section>
+
+<section id="contacto">
+    <h2>Ubicación y Contacto</h2>
+    <p>Dirección: [https://maps.app.goo.gl/swp78tMoeh7ps8nY7]</p>
+    <p>Teléfono: [aun no contamos]</p>
+    <p>Correo: [aun no tenemos]</p>
+</section>
+
+<section id="eventos">
+    <h2>Eventos</h2>
+    <div class="event-list">
+        <h3>Próximos Eventos</h3>
+        <ul>
+            <li>📅 por ahora nada</li>
+            <li>📅 por ahora nada</li>
+            <li>📅 por ahora nada</li>
+        </ul>
+    </div>
+</section>
+
+</body>
+</html>
+
+<section id="noticias">
+    <h2>Noticias</h2>
+    <div class="news-list">
+        <h3>Últimas Noticias</h3>
+        <ul>
+            <li>📢 nada por ahora.</li>
+            <li>📢 nada por ahora.</li>
+            <li>📢 nada por ahora.</li>
+        </ul>
+    </div>
+</section>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recomendaciones Anónimas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        #mensajes-lista {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        #mensajes-lista li {
+            background-color: #f9f9f9;
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        #reiniciar-btn {
+            display: none; /* El botón está oculto por defecto */
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Envía tu recomendación o pregunta de forma anónima</h2>
+
+    <!-- Formulario para enviar mensaje -->
+    <form id="anonimo-form">
+        <label for="mensaje">Escribe tu recomendación o pregunta:</label><br>
+        <textarea id="mensaje" name="mensaje" rows="4" cols="50" required></textarea><br><br>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <h3>Mensajes recientes:</h3>
+    <ul id="mensajes-lista">
+        <!-- Los mensajes se mostrarán aquí -->
+    </ul>
+
+    <button id="reiniciar-btn">Reiniciar mensajes</button>
+
+    <script>
+        // Función para guardar el mensaje en localStorage
+        function guardarMensaje(mensaje) {
+            let mensajes = JSON.parse(localStorage.getItem('mensajes')) || [];
+            mensajes.push(mensaje);
+            localStorage.setItem('mensajes', JSON.stringify(mensajes));
+            mostrarMensajes(); // Actualizar la lista de mensajes
+        }
+
+        // Función para mostrar los mensajes
+        function mostrarMensajes() {
+            let mensajes = JSON.parse(localStorage.getItem('mensajes')) || [];
+            const listaMensajes = document.getElementById('mensajes-lista');
+            listaMensajes.innerHTML = ''; // Limpiar lista actual
+
+            mensajes.forEach(mensaje => {
+                let li = document.createElement('li');
+                li.textContent = mensaje;
+                listaMensajes.appendChild(li);
+            });
+        }
+
+        // Escuchar el evento de envío del formulario
+        document.getElementById('anonimo-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const mensaje = document.getElementById('mensaje').value;
+            if (mensaje) {
+                guardarMensaje(mensaje); // Guardar el mensaje en localStorage
+                document.getElementById('mensaje').value = ''; // Limpiar el campo de texto
+            }
+        });
+
+        // Mostrar el botón de reiniciar si se ingresa el código correcto
+        function verificarCodigo() {
+            const codigoSecreto = prompt("Introduce el código secreto para reiniciar los mensajes:");
+            const codigoCorrecto = "enderman123"; // Cambia esto por tu propio código
+
+            if (codigoSecreto === codigoCorrecto) {
+                document.getElementById('reiniciar-btn').style.display = 'block'; // Mostrar el botón
+            } else {
+                alert("Código incorrecto. No tienes acceso para reiniciar los mensajes.");
+            }
+        }
+
+        // Función para reiniciar los mensajes (limpiar localStorage)
+        document.getElementById('reiniciar-btn').addEventListener('click', function() {
+            if (confirm('¿Estás seguro de que quieres reiniciar los mensajes?')) {
+                localStorage.removeItem('mensajes'); // Eliminar todos los mensajes guardados
+                mostrarMensajes(); // Actualizar la lista vacía
+            }
+        });
+
+        // Mostrar los mensajes al cargar la página
+        mostrarMensajes();
+
+        // Llamar a la función para verificar el código al cargar la página
+        verificarCodigo(); // Solicitar código al cargar la página
+    </script>
+
+</body>
+</html>
+
+<section id="recursos">
+    <h2>Recursos Útiles</h2>
+    <ul>
+        <li><a href="
+            https://www.facebook.com/p/IE-40201-Técnico-Agropecuario-La-Colina-100078082419471/
+            " target="_blank">facebook</a></li>
+        <li><a href="mantenimiento" target="_blank">Wikipedia</a></li>
+        <li><a href="mantenimiento" target="_blank">Khan Academy</a></li>
+    </ul>
+</section>
+
+
+
